@@ -29,14 +29,18 @@ jobs:
       - name: Join issue labels
         if: github.event_name == 'issues'
         run: |
-         echo "Issue labels:"
-         echo "${{ toJSON(github.event.issue.labels) }}"
+          echo "Issue labels:"
+          echo "${{ toJSON(github.event.issue.labels) }}"
 
       - name: Convert job context to JSON
-        run: echo "Job context in JSON: ${{ toJSON(github.job) }}"
+        run: |
+          echo "Job context in JSON:"
+          echo "${{ toJSON(job) }}"
 
       - name: Parse JSON string
-        run: echo "Parsed JSON: ${{ fromJSON('{\"hello\":\"world\"}').hello }}"
+        run: |
+          echo "Parsed JSON:"
+          echo "${{ fromJSON('{\"hello\":\"world\"}').hello }}"
 
       - name: Hash files
         run: echo "Hash of files: ${{ hashFiles('**/package-lock.json', '**/Gemfile.lock') }}"
