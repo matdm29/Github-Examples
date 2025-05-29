@@ -28,7 +28,9 @@ jobs:
 
       - name: Join issue labels
         if: github.event_name == 'issues'
-        run: echo "Issue labels: ${{ join(github.event.issue.labels.*.name, ', ') }}"
+        run: |
+         echo "Issue labels:"
+         echo "${{ toJSON(github.event.issue.labels) }}"
 
       - name: Convert job context to JSON
         run: echo "Job context in JSON: ${{ toJSON(github.job) }}"
